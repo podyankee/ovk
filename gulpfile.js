@@ -15,30 +15,30 @@ var  imagemin = require('gulp-imagemin');
 var pngcrush = require('imagemin-pngcrush');
 
 var env,
-    sassStyle;
+	sassStyle;
 
 env = process.env.NODE_ENV || 'development';
 
-if (env==='development') 
-  {
-  sassStyle = 'expanded';
+if (env==='development')
+	{
+	sassStyle = 'expanded';
 } else {
-  sassStyle = 'compressed';
+	sassStyle = 'compressed';
 }
 
 var messages = {
-    jekyllBuild: '<span style="color: grey">Running:</span> $ jekyll build'
+	jekyllBuild: '<span style="color: grey">Running:</span> $ jekyll build'
 };
 
 
 function customPlumber(errTitle) {
-  return plumber({
-    errorHandler: notify.onError({
-      // Customizing error title
-      title: errTitle || "Error running Gulp",
-      message: "Error: <%= error.message %>",
-    })
-  });
+	return plumber({
+	errorHandler: notify.onError({
+		// Customizing error title
+		title: errTitle || "Error running Gulp",
+		message: "Error: <%= error.message %>",
+	})
+	});
 }
 
 
@@ -47,55 +47,55 @@ function customPlumber(errTitle) {
  * Build the Jekyll Site
  */
 gulp.task('jekyll-build', function (done) {
-    browserSync.notify(messages.jekyllBuild);
-    return cp.spawn('jekyll', ['build'], {stdio: 'inherit'})
-        .on('close', done);
+	browserSync.notify(messages.jekyllBuild);
+	return cp.spawn('jekyll', ['build'], {stdio: 'inherit'})
+		.on('close', done);
 });
 
 /**
  * Rebuild Jekyll & do page reload
  */
 gulp.task('jekyll-rebuild', ['jekyll-build'], function () {
-    browserSync.reload();
+	browserSync.reload();
 });
 
 /**
  * Wait for jekyll-build, then launch the Server
  */
 gulp.task('browser-sync', ['sass', 'jekyll-build'], function() {
-    browserSync({
-        server: {
-            baseDir: '_site'
-        },
+	browserSync({
+		server: {
+			baseDir: '_site'
+		},
 		notify: false
-    });
+	});
 });
 
 gulp.task('js', function() {
-  return gulp.src(['assets/js/functions.js'])
-  	.pipe(customPlumber('Error Running JS'))
-  	.pipe(gulpif(env === 'production', uglify()))
-    .pipe(gulp.dest('_site/assets/js'))
-  	.pipe(browserSync.reload({stream:true}));
+	return gulp.src(['assets/js/functions.js'])
+		.pipe(customPlumber('Error Running JS'))
+		.pipe(gulpif(env === 'production', uglify()))
+	.pipe(gulp.dest('_site/assets/js'))
+		.pipe(browserSync.reload({stream:true}));
 });
 
 /**
  * Compile files from _scss into both _site/css (for live injecting) and site (for future jekyll builds)
  */
 gulp.task('sass', function () {
-    return gulp.src('assets/css/main.scss')
+	return gulp.src('assets/css/main.scss')
 		.pipe(customPlumber('Error Running Sass'))
 		.pipe(sourcemaps.init())
-        .pipe(sass({
+		.pipe(sass({
 			outputStyle: sassStyle,
-            includePaths: ['css'],
-            onError: browserSync.notify
-        }))
-        .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
+			includePaths: ['css'],
+			onError: browserSync.notify
+		}))
+		.pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
 		.pipe(sourcemaps.write())
-        .pipe(gulp.dest('_site/assets/css'))
+		.pipe(gulp.dest('_site/assets/css'))
 		.pipe(gulp.dest('assets/css'))
-        .pipe(browserSync.reload({stream:true}));
+		.pipe(browserSync.reload({stream:true}));
 });
 
 /**
@@ -103,23 +103,25 @@ gulp.task('sass', function () {
  */
 
 gulp.task('jade', function  () {
-  return gulp.src('_jadefiles/*.jade')
-  .pipe(customPlumber('Error Running JADE'))
-  .pipe(jade())
-  .pipe(gulp.dest('_includes'));
+	return gulp.src('_jadefiles/*.jade')
+	.pipe(customPlumber('Error Running JADE'))
+	.pipe(jade({
+		pretty: true
+	}))
+	.pipe(gulp.dest('_includes'));
 });
 
 
 
 
 gulp.task('images', function() {
-  gulp.src('assets/img/**/*.*')
-    .pipe(gulpif(env === 'production', imagemin({
-      progressive: true,
-      svgoPlugins: [{ removeViewBox: false }]
-    })))
-    .pipe(gulpif(env === 'production', gulp.dest('_site/assets/img1')))
-    .pipe(browserSync.reload({stream:true}));
+	gulp.src('assets/img/**/*.*')
+	.pipe(gulpif(env === 'production', imagemin({
+		progressive: true,
+		svgoPlugins: [{ removeViewBox: false }]
+	})))
+	.pipe(gulpif(env === 'production', gulp.dest('_site/assets/img1')))
+	.pipe(browserSync.reload({stream:true}));
 });
 
 
@@ -131,10 +133,10 @@ gulp.task('images', function() {
  */
 gulp.task('watch', function () {
 	gulp.watch('assets/js/*.js', ['js']);
-    gulp.watch('assets/css/**/*.sass', ['sass']);
-    gulp.watch(['index.html', '_layouts/*.html', '_includes/*'], ['jekyll-rebuild']);
-    gulp.watch(['_jadefiles/*.jade'], ['jade']);
-    gulp.watch(['assets/img/**/*.*'], ['images']);
+	gulp.watch('assets/css/**/*.sass', ['sass']);
+	gulp.watch(['index.html', '_layouts/*.html', '_includes/*'], ['jekyll-rebuild']);
+	gulp.watch(['_jadefiles/*.jade'], ['jade']);
+	gulp.watch(['assets/img/**/*.*'], ['images']);
 });
 
 /**
