@@ -1,0 +1,48 @@
+.rounded-img-wrap
+	border-radius: 10em
+	border: 6px solid $accent
+	overflow: hidden
+	width: 125px
+	height: 125px
+	text-align: center
+	margin: auto
+	+mt(.5s)
+	
+	img
+		max-width: 100%
+
+.item-vertical-2
+	&:hover
+		.rounded-img-wrap
+			transform: scale(1.15)
+		.iv-phone
+			color: $accent
+	
+	text-align: center
+	margin-top: 50px
+
+	h3
+		font-size: em(17px)
+		font-family: "OpenSansBold", sans-serif
+		color: #444
+		margin-top: 40px
+		margin-bottom: 10px
+
+	p
+		font-size: em(13px)
+		color: #666
+		letter-spacing: 2px
+		margin-top: 0
+	
+		
+
+.iv-phone
+	color: #999
+	font-size: 17px
+	font-family: "ExoBold", sans-serif
+	+mt(.5s)
+	margin-top: 22px
+
+	i
+		font-size: 19px
+		margin-right: 5px
