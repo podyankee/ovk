@@ -1,0 +1,34 @@
+section.s-wide.s-dark.s-contacts
+  .container
+    .row
+      .col-sm-12
+        h2 Контакты
+      .col-sm-12
+        .row
+        .s-contacts-wrapper.clearfix
+          .col-sm-8
+            .contacts-text
+              p #[i.fa.fa-map-marker] #[strong Адрес:] Москва, ул. Пантелеева, 15, оф. 3-03
+              p #[i.fa.fa-mobile] #[strong Телефон:] 8(495) 970-44-90
+            .map
+              | Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Снова текстов над алфавит семь назад родного, коварных снова. Там его вопрос от всех не диких. Встретил пояс знаках вопрос вопроса!
+          .col-sm-4
+            form.contact-form
+              .contact-form-head
+                h4 Оставить заявку
+                p Оставьте заявку и мы свяжемся с вами в течении 20 минут
+              label
+                #[span Ваше имя:]
+                input(type="text", name="Имя",placeholder="Ваше имя...")
+              label
+                #[span Ваш телефон:]
+                input(type="text", name="Телефон",placeholder="Ваш телефон...", required)
+              label
+                #[span Услуга:]
+                select(name="Услуга")
+                  option(value="Монтаж") Монтаж
+                  option(value="Проектироание") Проектироание
+                  option(value="Оборудование") Оборудование
+              .text-center
+                button.button.button-small Отправить
+  

@@ -1,5 +1,7 @@
 $(function  () {
-	
+
+	$("form select").selectize();
+
 	$('.mfp-gallery').each(function  () {
 	$(this).magnificPopup({
 	delegate: 'a',
@@ -33,18 +35,18 @@ $(function  () {
 	}
 });
 	});
-	
-	
-	
-	
+
+
+
+
 	$(".mouse-icon").click(function() {
 		$("html, body").animate({
 			scrollTop : $(".s-adv").offset().top
 		}, 800);
 	});
-	
+
 	$(".s-adv").waypoint(function  () {
-		
+
 		$({blurRadius: 5}).animate({blurRadius: 0}, {
 
 	duration: 1200,
@@ -68,16 +70,16 @@ $(".s-adv-item h3 span").each(function() {
 	this.destroy();
 	}, {
 		offset: '70%'
-						 
+
 		 });
-	
+
 	$(".toggle-mnu").click(function() {
 	$(this).toggleClass("on");
 	$(".main-mnu").slideToggle();
 	return false;
 });
-	
-	
+
+
 	/*
  * Replace all SVG images with inline SVG
  */
@@ -114,6 +116,6 @@ jQuery('img.img-svg').each(function(){
 	}, 'xml');
 
 });
-	
-	
+
+
 });

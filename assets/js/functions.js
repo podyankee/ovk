@@ -1,5 +1,8 @@
 $(function  () {
 
+
+	$("form select").selectize();
+
 	$(".carousel-brands").owlCarousel({
 		loop:true,
 		margin:30,

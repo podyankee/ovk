@@ -1,17 +1,17 @@
 ::-webkit-input-placeholder
-	color: #666
+	color: #222
 	opacity: 1
 
 *:-moz-placeholder
-	color: #666
+	color: #222
 	opacity: 1
 
 *::-moz-placeholder
-	color: #666
+	color: #222
 	opacity: 1
 
 *:-ms-input-placeholder
-	color: #666
+	color: #222
 	opacity: 1
 
 body input:focus:required:invalid,
@@ -39,7 +39,7 @@ h1
 	line-height: 1.2
 
 .ishome
-	
+
 	h1
 		margin-top: 0
 
@@ -56,6 +56,10 @@ h4
 
 .hidden
 	display: none
+
+b, strong
+	font-family: "OpenSansSemiBold", sans-serif
+	font-weight: normal
 
 a
 	color: $accent
@@ -91,7 +95,66 @@ a
 
 .mfp-wrap ~ *
 	filter: blur(5px)
-	
 
+.contact-form
+	padding: 32px 26px
+	background-color: darken($blue, 5%)
+	.button
+		margin-top: 25px
+	&-head
+		text-align: center
+		h4
+			font-size: em(18px)
+			margin-top: 0
+			margin-bottom: 10px
+		p
+			color: #fff
+			opacity: .6
+			font-size: 14px
+			margin-top: 0
 
-	
+form
+	label
+		display: block
+		margin-bottom: 12px
+		span
+			font-size: 14px
+			color: #fff
+			opacity: .3
+			display: block
+			margin-bottom: 3px
+		input, select, .selectize-input, .selectize-input.items.full, .selectize-input.items.full.dropdown-active
+			background: rgba(255, 255, 255, .6)
+			border-radius: 2px
+			border: none
+			padding: 9px 15px 7px
+			display: block
+			width: 100%
+			color: #222
+			font-size: em(15px)
+			border-bottom: transparent 4px solid
+			transition: all .5s ease
+		.selectize-input, .selectize-input.full
+			padding: 11px 15px
+			&:focus
+				border-bottom: lighten($blue, 10%)4px solid
+				background-color: #fff
+		.selectize-dropdown
+			border: none
+			.option
+				padding: 8px 15px
+			.active
+				background-color: $blue
+				color: #fff
+.selectize-control.single .selectize-input
+	&::after
+		position: absolute
+		top: 50%
+		right: 26px
+		margin-top: -7px
+		content: '\f107'
+		border: none
+		font-family: "fontAwesome"
+		font-size: 20px
+	&.dropdown-active
+		margin-top: -7px
